@@ -1,4 +1,8 @@
-#[expect(clippy::manual_swap, reason = "...")]
+#[expect(
+    clippy::manual_swap,
+    reason = "as trocas são escritas à mão de propósito — entender a mecânica \
+              da troca é objetivo do repo, não usar o helper da std"
+)]
 pub fn quick_sort(arr: &mut [i32]) {
     
     let n = arr.len();
@@ -6,6 +10,12 @@ pub fn quick_sort(arr: &mut [i32]) {
     if n <= 1 {
         return;
     }
+
+    let aux = arr[n - 1];
+
+    arr[n - 1] = arr[n/2];
+
+    arr[n/2] = aux; 
 
     let pivo = arr[n - 1];
 
